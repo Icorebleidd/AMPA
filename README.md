@@ -1,1 +1,52 @@
 # AMPA
+
+A PyQt5 application to calculate the parallactic angle and airmass based on various astronomical parameters.
+
+## Features
+- Calculate parallactic angle based on hour angles, declinations, and latitude.
+- Calculate airmass based on hour angles, declinations, and latitude.
+- Display results in a table format.
+- Export table as a PNG or PDF.
+
+## Requirements
+- Python 3.8+
+- PyQt5
+- Matplotlib
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Icorebleidd/AMPA.git
+   cd AMPA
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+Run the application with:
+```bash
+python AirMass.py
+python ParallacticAngle.py
+```
+
+## Inputs
+**AF OF NOW YOU MUST USE SYMBOLS IN INPUT**
+- **Hour Angles:** Comma-separated values in hours (e.g., `1.5, 3.0, 4.5`).
+- **Declination:** Comma-separated values in degrees (e.g., `-30, 0, 30`).
+- **Latitude:** Single value in degrees (e.g., `45`).
+
+## Output
+- A table displaying the computed parallactic angle or airmass values.
+- Column headers: Computed values based on input hour angles or declinations.
+- Row headers: Input values for declinations or hour angles.
+
+## Exporting Data
+You can save the table as a PNG or PDF file via the "Export Table" button.
+
+## License
+This project is licensed under the MIT License.
+
+## Author
+Leonardo Tozzo - [GitHub Profile](https://github.com/Icorebleidd)
