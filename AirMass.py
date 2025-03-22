@@ -23,6 +23,9 @@ def parse_declination(dec_str):
         return math.radians(dec_degree), dec_degree
     except:
         return None, None
+    
+def is_exponential(value):
+    return 'e' in str(value).lower()
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -84,7 +87,10 @@ class MainWindow(QtWidgets.QWidget):
             
             for i, row in enumerate(self.nu_matrix):
                 for j, value in enumerate(row):
-                    self.table.setItem(i, j, QtWidgets.QTableWidgetItem(f"{round(value, 2)}"))
+                    if is_exponential(value):
+                        self.table.setItem(i, j, QtWidgets.QTableWidgetItem(f"{value:.2e}"))
+                    else:
+                        self.table.setItem(i, j, QtWidgets.QTableWidgetItem(f"{round(value, 2)}"))
         
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", f"An error occurred: {e}")
@@ -95,11 +101,11 @@ class MainWindow(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.critical(self, "Error", "No data available. Calculate first!")
                 return
             
-            fig, ax = plt.subplots(figsize=(10, 6))
+            fig, ax = plt.subplots(figsize=(len(self.declination_degrees) * 0.8, len(self.hour_angle_hours) * 0.5))
             ax.axis('tight')
             ax.axis('off')
             
-            table_data = [[round(value, 2) for value in row] for row in self.nu_matrix]
+            table_data = [[f"{value:.2e}" if is_exponential(value) else round(value, 2) for value in row] for row in self.nu_matrix]
             col_labels = [f"{h:.1f}h" for h in self.hour_angle_hours]
             row_labels = [f"{d:.1f}°" for d in self.declination_degrees]
             

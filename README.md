@@ -32,10 +32,9 @@ python ParallacticAngle.py
 ```
 
 ## Inputs
-**AF OF NOW YOU MUST USE SYMBOLS IN INPUT**
 - **Hour Angles:** Comma-separated values in hours (e.g., `1.5, 3.0, 4.5`).
 - **Declination:** Comma-separated values in degrees (e.g., `-30, 0, 30`).
-- **Latitude:** Single value in degrees (e.g., `45`).
+- **Latitude:** Single value in degrees (e.g., `45 32 00`).
 
 ## Output
 - A table displaying the computed parallactic angle or airmass values.
