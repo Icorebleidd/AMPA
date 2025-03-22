@@ -4,30 +4,28 @@ import matplotlib.pyplot as plt
 from PyQt5 import QtWidgets
 
 def calculate_parallactic_angle(hour_angle, declination, latitude):
-    tan_nu = math.sin(hour_angle) / ((math.tan(latitude) * math.cos(declination)) - (math.sin(declination) * math.cos(hour_angle)))
-    nu = math.atan(tan_nu)
-    return math.degrees(nu)
+    try:
+        denominator = (math.tan(latitude) * math.cos(declination)) - (math.sin(declination) * math.cos(hour_angle))
+        if abs(denominator) < 1e-10:
+            return float('nan')  # Avoid division by zero
+        tan_nu = math.sin(hour_angle) / denominator
+        nu = math.atan(tan_nu)
+        return math.degrees(nu)
+    except:
+        return float('nan')
 
 def parse_angle(angle_str):
     try:
-        hour = angle_str.index("h")
-        minute = angle_str.index("m")
-        ang_act_hour = float(angle_str[0:hour])
-        ang_act_minute = float(angle_str[hour + 1 : minute]) / 60
-        ang_act_second = float(angle_str[minute + 1 : -1]) / 3600
-        total_hour_angle = (ang_act_hour + ang_act_minute + ang_act_second) * 15
-        return math.radians(total_hour_angle), ang_act_hour + ang_act_minute + ang_act_second
+        parts = angle_str.replace('h', ' ').replace('m', ' ').replace('s', ' ').split()
+        total_hours = float(parts[0]) + float(parts[1]) / 60 + float(parts[2]) / 3600
+        return math.radians(total_hours * 15), total_hours
     except:
         return None, None
 
 def parse_declination(dec_str):
     try:
-        degree = dec_str.index("°")
-        minute = dec_str.index("'")
-        dec_act_degree = float(dec_str[0:degree])
-        dec_act_minute = float(dec_str[degree + 1 : minute]) / 60
-        dec_act_second = float(dec_str[minute + 1 : -1]) / 3600
-        dec_degree = dec_act_degree + dec_act_minute + dec_act_second
+        parts = dec_str.replace('°', ' ').replace("'", ' ').replace('"', ' ').split()
+        dec_degree = float(parts[0]) + float(parts[1]) / 60 + float(parts[2]) / 3600
         return math.radians(dec_degree), dec_degree
     except:
         return None, None
@@ -132,6 +130,3 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
-
-# TODO: If i put the same latitude in the declination input, the program crashes causing a division by zero. Fix this.
-# TODO: Accept input with and without symbols, same as in SkyRefrax. Fix this.
