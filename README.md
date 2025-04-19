@@ -37,7 +37,7 @@ python ParallacticAngle.py
 ```
 
 ## Inputs
-- **Hour Angles:** Comma-separated values in hours (e.g., `1.5 0 0, 3.0 0 0, 4.5 0 0`).
+- **Hour Angles:** Comma-separated values in hours (e.g., `1.5 30 0, 3.0 0 0, 4.5 0 0`).
 - **Declination:** Comma-separated values in degrees (e.g., `-30 0 0, 0 0 0, 30 0 0`).
 - **Latitude:** Single value in degrees (e.g., `45 32 00`).
 
