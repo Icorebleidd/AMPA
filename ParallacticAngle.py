@@ -39,7 +39,7 @@ class MainWindow(QtWidgets.QWidget):
         self.init_ui()
     
     def init_ui(self):
-        self.setWindowTitle("Parallactic Angle Calculator")
+        self.setWindowTitle("Parallactic Angle")
         self.setGeometry(100, 100, 600, 400)
         
         layout = QtWidgets.QVBoxLayout()
@@ -108,6 +108,7 @@ class MainWindow(QtWidgets.QWidget):
                 return
             
             fig, ax = plt.subplots(figsize=(len(self.declination_degrees) * 0.8, len(self.hour_angle_hours) * 0.5))
+            fig.suptitle("Parallactic Angle", fontsize=12, fontweight='bold', y=0.95)
             ax.axis('tight')
             ax.axis('off')
             

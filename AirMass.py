@@ -33,7 +33,7 @@ class MainWindow(QtWidgets.QWidget):
         self.init_ui()
     
     def init_ui(self):
-        self.setWindowTitle("Air Mass Calculator")
+        self.setWindowTitle("Air Mass")
         self.setGeometry(100, 100, 600, 400)
         
         layout = QtWidgets.QVBoxLayout()
@@ -110,6 +110,7 @@ class MainWindow(QtWidgets.QWidget):
             row_labels = [f"{d:.1f}°" for d in self.declination_degrees]
             
             table = ax.table(cellText=table_data, colLabels=col_labels, rowLabels=row_labels, cellLoc='center', loc='center')
+            fig.suptitle("Air Mass", fontsize=12, fontweight='bold', y=0.95)
             table.auto_set_font_size(False)
             table.set_fontsize(10)
             table.scale(1.2, 1.2)
